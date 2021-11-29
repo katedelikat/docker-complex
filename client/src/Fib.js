@@ -18,8 +18,8 @@ const Fib = () => {
 
     const fetchIndeces = async () => {
         const indeces = await axios.get('/api/values/all');
-        setSeenIndeces(indeces.data);
-        
+        const rawIndeces = Object.values(indeces.data).map(one => one.number)
+        setSeenIndeces(rawIndeces);
     }
 
     const renderSeenIndeces = () => {
@@ -32,8 +32,8 @@ const Fib = () => {
                 {
                     Object.keys(results).map(one => (
                         <div>
-                            <label>one</label>
-                            <div>results[one]</div>
+                            <label>For {one}: </label>
+                            <span>calculated {results[one]}</span>
                         </div>
                     ))
                 }

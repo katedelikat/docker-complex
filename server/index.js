@@ -47,7 +47,7 @@ app.get('/values/all', async (req, res) => {
 });
 
 app.get('/values/current', async (req, res) => {
-    redistClient.hgetall('values', (err, values) => {
+    redisClient.hgetall('values', (err, values) => {
         res.send(values);
     })
 });

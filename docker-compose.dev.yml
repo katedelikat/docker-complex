@@ -2,17 +2,17 @@ version: '3'
 services:
   postgres:
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: postgres_password
     image: 'postgres:latest'
   redis:
     image: 'redis:latest'
-  # nginx:
-  #   restart: always
-  #   build:
-  #     dockerfile: Dockerfile.dev
-  #     context: ./nginx
-  #   ports:
-  #     - 8090:80
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - 8090:80
   api:
     build:
       context: ./server
