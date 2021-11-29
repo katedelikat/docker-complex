@@ -30,8 +30,8 @@ const Fib = () => {
         return (
             <div>
                 {
-                    Object.keys(results).map(one => (
-                        <div>
+                    Object.keys(results).map((one, idx) => (
+                        <div key={"key " + idx}>
                             <label>For {one}: </label>
                             <span>calculated {results[one]}</span>
                         </div>
