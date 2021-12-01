@@ -19,7 +19,7 @@ after_success:
   - docker build -t katedelikat/complex-client ./client
   - docker build -t katedelikat/complex-worker ./worker
   - docker build -t katedelikat/complex-server ./server
-  - docker build -t katedelikat/complex-ngnix ./ngnix
+  - docker build -t katedelikat/complex-nginx ./nginx
 
   # Login to the docker CLI (for pushing the images to Docker Hub)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -28,6 +28,6 @@ after_success:
   - docker push katedelikat/complex-client
   - docker push katedelikat/complex-worker
   - docker push katedelikat/complex-server
-  - docker push katedelikat/complex-ngnix
+  - docker push katedelikat/complex-nginx
 
 language: generic 
