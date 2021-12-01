@@ -1,0 +1,33 @@
+# sudo mode is required
+sudo: required
+
+# we will need the copy of the docker service
+services:
+  - docker
+
+# build the dev version for running tests
+before_install:
+  - docker build -t katedelikat/react-test -f ./client/Dockerfile.dev ./client
+
+# run the tests ('npm test' is to overwrite the default command of the container)
+script:
+  - docker run -e CI=true katedelikat/react-test npm test
+
+
+after_success:
+  # build all images
+  - docker build -t katedelikat/complex-client ./client
+  - docker build -t katedelikat/complex-worker ./worker
+  - docker build -t katedelikat/complex-server ./server
+  - docker build -t katedelikat/complex-ngnix ./ngnix
+
+  # Login to the docker CLI (for pushing the images to Docker Hub)
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # push all created images to the Docker Hub (so they the be retrieved by the Ellastic Beanstalk)
+  - docker push katedelikat/complex-client
+  - docker push katedelikat/complex-worker
+  - docker push katedelikat/complex-server
+  - docker push katedelikat/complex-ngnix
+
+language: generic 
