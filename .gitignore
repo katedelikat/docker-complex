@@ -1,3 +1,5 @@
 
 client/node_modules___/del/node_modules/.bins/rimraf
 client/node_modules___/react-dev-utils/node_modules/.bin/browserslist
+.vscode/launch.json
+.vscode/tasks.json
