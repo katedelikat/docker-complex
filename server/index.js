@@ -42,25 +42,43 @@ app.get('/', (req, res) => {
 });
 
 app.get('/values/all', async (req, res) => {
-    const values = await pgClient.query('SELECT * from values');
-    res.send(values.rows);
+    console.log("In all")
+    try {
+        const values = await pgClient.query('SELECT * from values');
+        res.send(values.rows);
+    } catch (e) {
+        console.log("Exception during all" + e)
+        console.error("Exception during all" + e)
+    }
 });
 
 app.get('/values/current', async (req, res) => {
-    redisClient.hgetall('values', (err, values) => {
-        res.send(values);
-    })
+    console.log("In current")
+    try {
+        redisClient.hgetall('values', (err, values) => {
+            res.send(values);
+        })
+    } catch (e) {
+        console.log("Exception during current" + e)
+        console.error("Exception during current" + e)
+    }
 });
 
 app.post('/values', async (req, res) => {
+    console.log("In all")
     const index = req.body.index;
     if (parseInt(index) > 40) {
         return res.status(422).send('Index too high');
     }
 
-    redisClient.hset('values', index, 'Nothing yet');
-    redisPublisher.publish('insert', index);
-    pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
+    try {
+        redisClient.hset('values', index, 'Nothing yet');
+        redisPublisher.publish('insert', index);
+        pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
+    } catch {
+        console.log("Exception during values" + e)
+        console.error("Exception during values" + e)
+    }
 
     res.send({working: true});
 
