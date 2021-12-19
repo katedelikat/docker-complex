@@ -3,7 +3,7 @@ services:
   client:
     image: "katedelikat/complex-client"
     mem_limit: 128m
-    hostname: frontend
+    hostname: client
   server:
     image: "katedelikat/complex-server"
     mem_limit: 128m
@@ -11,11 +11,6 @@ services:
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
-      - PGUSER=$PGUSER
-      - PGHOST=$PGHOST
-      - PGDATABASE=$PGDATABASE
-      - PGPASSWORD=$PGPASSWORD
-      - PGPORT=$PGPORT
   worker:
     image: "katedelikat/complex-worker"
     mem_limit: 128m

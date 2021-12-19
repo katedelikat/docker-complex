@@ -16,19 +16,19 @@ script:
 
 after_success:
   # build all images
-  - docker build -t katedelikat/complex-client ./client
-  - docker build -t katedelikat/complex-worker ./worker
-  - docker build -t katedelikat/complex-server ./server
-  - docker build -t katedelikat/complex-nginx ./nginx
+  - docker build -t katedelikat/multi-client ./client
+  - docker build -t katedelikat/multi-worker ./worker
+  - docker build -t katedelikat/multi-server ./server
+  - docker build -t katedelikat/multi-nginx ./nginx
 
   # Login to the docker CLI (for pushing the images to Docker Hub)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # push all created images to the Docker Hub (so they can be retrieved by the Ellastic Beanstalk)
-  - docker push katedelikat/complex-client
-  - docker push katedelikat/complex-worker
-  - docker push katedelikat/complex-server
-  - docker push katedelikat/complex-nginx
+  - docker push katedelikat/multi-client
+  - docker push katedelikat/multi-worker
+  - docker push katedelikat/multi-server
+  - docker push katedelikat/multi-nginx
 
 deploy:
   provider: elasticbeanstalk
