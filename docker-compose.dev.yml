@@ -1,9 +1,9 @@
 version: '3'
 services:
-  postgres:
-    environment:
-      POSTGRES_PASSWORD: postgres_password
-    image: 'postgres:latest'
+  # postgres:
+  #   environment:
+  #     POSTGRES_PASSWORD: postgres_password
+  #   image: 'postgres:latest'
   redis:
     image: 'redis:latest'
   nginx:
