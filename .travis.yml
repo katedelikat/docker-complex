@@ -24,7 +24,7 @@ after_success:
   # Login to the docker CLI (for pushing the images to Docker Hub)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  # push all created images to the Docker Hub (so they the be retrieved by the Ellastic Beanstalk)
+  # push all created images to the Docker Hub (so they can be retrieved by the Ellastic Beanstalk)
   - docker push katedelikat/complex-client
   - docker push katedelikat/complex-worker
   - docker push katedelikat/complex-server
@@ -41,5 +41,3 @@ deploy:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-
-language: generic 
